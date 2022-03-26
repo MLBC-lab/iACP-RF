@@ -8,7 +8,7 @@ import numpy as np
 elements = 'ACDEFGHIKLMNPQRSTVWY'
 
 
-def extract(args, X, Y):
+def extract_k_mers(args, X, Y):
     T = []  # All instance ...
 
     m3 = list(itertools.product(elements, repeat=3))
@@ -70,3 +70,65 @@ def extract(args, X, Y):
 
     return np.array(T)
 
+def extractBPF(args, seq_temp):
+    seq = seq_temp
+    tem_vec =[]
+    bpf = []
+    seq_len = []
+    for seq in seq_temp:
+        fea = []
+        for i in range(len(seq)):
+            seq_len.append(len(seq))
+            if seq[i] =='A':
+                tem_vec = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='C':
+                tem_vec = [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='D':
+                tem_vec = [0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='E':
+                tem_vec = [0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='F':
+                tem_vec = [0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='G':
+                tem_vec = [0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='H':
+                tem_vec = [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='I':
+                tem_vec = [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='K':
+                tem_vec = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='L':
+                tem_vec = [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='M':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0]
+            elif seq[i]=='N':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0]
+            elif seq[i]=='P':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
+            elif seq[i]=='Q':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0]
+            elif seq[i]=='R':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0]
+            elif seq[i]=='S':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0]
+            elif seq[i]=='T':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0]
+            elif seq[i]=='V':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0]
+            elif seq[i]=='W':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0]
+            elif seq[i]=='Y':
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+            else:
+                tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            fea.append(np.array(tem_vec))
+        
+        if len(seq)<50:
+            temp_count = len(seq)
+            while  temp_count < 50:
+                fea.append(np.array([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]))
+                temp_count += 1
+
+        bpf.append(np.array(fea).flatten())
+
+    return np.array(bpf)

@@ -14,7 +14,9 @@ def classifiers(X, Y, Z,  X_ind, Y_ind, Z_ind, Label1, Label2, Label3, label_ind
     final_pred = np.array([])
     final_proba = np.array([])
 
-    model1= model2= model3 = RandomForestClassifier(n_estimators=150)
+    model1 = RandomForestClassifier(n_estimators=150)
+    model2 = RandomForestClassifier(n_estimators=250)
+    model3 = RandomForestClassifier(n_estimators=400)
     
     X_train = X
     LabelX_train = Label1
